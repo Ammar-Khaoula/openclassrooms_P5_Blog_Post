@@ -28,4 +28,21 @@ class AdminService
     public function destroyPost(int $idPost){
         return $this->AdminRepository->destroyPost($idPost);       
     }
+    public function getAllUsers(){
+        return $this->AdminRepository->getAllUsres();           
+    }
+   
+    public function updateProfil(int $idUser, array $data){
+        $pathPhoto="";
+        if(!empty($_FILES['photo']['full_path']) && $_FILES['photo']['size'] <= 3000000){
+          $infoImage = pathinfo($_FILES['photo']['name']);
+          $extentionImage = $infoImage['extension'];  
+          $extentionArray = array('png', 'gif', 'jpg', 'jpeg');
+          $pathPhoto = 'images/'.$infoImage['basename'];
+          if(in_array($extentionImage, $extentionArray)){
+              move_uploaded_file($_FILES['photo']['tmp_name'], $pathPhoto);
+      }
+      }
+        return $this->AdminRepository->updateProfil($idUser, $data, $pathPhoto);       
+    }
 }

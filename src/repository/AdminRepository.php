@@ -11,7 +11,7 @@ class AdminRepository extends AbstractRepository
 {
     // get Admin
     public function getAdmin(){
-        $req = $this->db->getPDO()->prepare("SELECT * FROM users WHERE iAdmin = 1");
+        $req = $this->db->getPDO()->prepare("SELECT * FROM users WHERE isAdmin = 1");
         $req->setFetchMode(PDO::FETCH_CLASS, User::class);
         $req->execute(); 
         return $req->fetch();
@@ -53,4 +53,31 @@ class AdminRepository extends AbstractRepository
             $statement->setFetchMode(PDO::FETCH_CLASS, Post::class);
             return $statement->execute(array($idPost)); 
         }
+
+            //getAllUsers
+    public function getAllUsres(){
+        $statement = $this->db->getPDO()->prepare("SELECT * FROM users ORDER BY dateLastUpdate DESC");
+        $statement->setFetchMode(PDO::FETCH_CLASS, User::class);
+        $statement->execute(); 
+        return $statement->fetchAll();
+    }
+  
+    public function updateProfil(int $idUser, array $data, string $pathPhoto){      
+        $sqlRequestPart = "";
+    
+        if(!is_null($pathPhoto) && !empty($pathPhoto)){
+           $data['photo'] = $pathPhoto;
+        }
+        $i = 1;
+           foreach($data as $key => $value){
+           $comma = $i == count($data) ? "" : ', ';
+           $sqlRequestPart .= "{$key} = :{$key}{$comma}";
+           $i++;   
+           }
+           $idUser = $_GET['idUser'];
+           $statement = $this->db->getPDO()->prepare("UPDATE users SET {$sqlRequestPart} WHERE idUser = '$idUser'"); 
+           $statement->setFetchMode(PDO::FETCH_CLASS, User::class);
+           return $statement->execute($data); 
+    
+    }
 }

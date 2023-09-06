@@ -87,4 +87,70 @@ class AdminController extends controller{
                 return header('location: /openclassrooms_P5_Blog_Post/admin/posts');
             }
     }
+    //get all users
+    public function getAllUsers(){
+        $users = $this->AdminService->getAllUsers();
+        return $this->view('admin.listUsers', compact('users'));
+    }
+    public function profil(){
+        $admin = $this->AdminService->getAdmin();
+        return $this->view('admin.profil', compact('admin'));
+    }
+    //update profil
+    public function editProfil(){
+        if($this->isAdmin());
+            $admin = $this->AdminService->getAdmin();
+        return $this->view('admin.editProfil', compact('admin'));
+    }
+    public function updateProfil(){
+        $result = $this->AdminService->updateProfil($_GET['idUser'], $_POST);
+        if($result){
+        return header('location: /openclassrooms_P5_Blog_Post/profil');
+    }
+}
+    public function sendMessage(){
+            define('API_USER', 'b6ec5c5caa3fe42382477ac17f66e1bc');
+            define('API_LOGIN', 'e558f10c03958ac47c4ff219d9fd2f6c');
+            $mj = new \Mailjet\Client(API_USER, API_LOGIN, true,['version' => 'v3.1']);
+        
+            if(!empty($_POST['lastName']) && !empty($_POST['firstName']) && !empty($_POST['email']) && !empty($_POST['message'])){
+                $lastName = htmlspecialchars($_POST['lastName']);
+                $firstName = htmlspecialchars($_POST['firstName']);
+                $email = htmlspecialchars($_POST['email']);
+                $message = htmlspecialchars($_POST['message']);
+        
+                if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+                    $body = [
+                        'Messages' => [
+                            [
+                                'From' => [
+                                    'Email' => "khaoulabha1991@gmail.com",
+                                    'Name' => "Ammar Khaoula"
+                                ],
+                                'To' => [
+                                    [
+                                        'Email' => "khaoulabha1991@gmail.com",
+                                        'Name' => "Ammar Khaoula"
+                                    ]
+                                ],
+                                'Subject' => "demande de renseignement",
+                                'TextPart' => "$email, $message",
+                            ]
+                        ]
+                    ];
+                    $response = $mj->post(Resources::$Email, ['body' => $body]);
+                    $response->success();
+                    echo "email envoyé avec success";
+        
+                }else{
+                    echo "email non valide";
+                }
+            }else{
+                header('location: /openclassrooms_P5_Blog_Post/');
+            }
+            return $this->view('admin.profil');
+    }
+    
+    
+    
 }
