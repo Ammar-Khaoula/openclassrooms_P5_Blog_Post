@@ -37,6 +37,13 @@ $router->post('/profil', 'Src\Controllers\AdminController@sendMessage');
 $router->get('/admin/editProfil', 'Src\Controllers\AdminController@editProfil');
 $router->post('/admin/editProfil', 'Src\Controllers\AdminController@updateProfil');
 
+// comment
+$router->get('/post/createComment', 'Src\Controllers\postController@createComments');
+$router->post('/post/createComment', 'Src\Controllers\postController@createComment');//
+$router->get('/post/editComment',     'Src\Controllers\postController@commentbById');
+$router->post('/post/updateComment',     'Src\Controllers\postController@updateComment');
+$router->post('/post/delete',     'Src\Controllers\PostController@destroyComment');
+
 
 try{
     $router->run();
