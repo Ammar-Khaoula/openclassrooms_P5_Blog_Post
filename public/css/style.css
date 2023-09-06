@@ -1,0 +1,12 @@
+.titlePost {
+    color: rgb(43, 102, 189);
+    text-transform: capitalize;
+}
+
+.lists {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin: 20px;
+    color: rgb(156, 179, 240);
+}

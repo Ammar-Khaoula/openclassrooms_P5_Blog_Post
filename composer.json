@@ -1,0 +1,17 @@
+{
+    "name": "php/open-classrooms_p5_create_your_first_blog_in_php",
+    "autoload": {
+        "psr-4": {
+            "Router\\": "routes/",
+            "Src\\": "src/",
+            "Database\\": "configBDD/"
+        }
+    },
+    "authors": [{
+        "name": "Ammar Khaoula",
+        "email": "khaoulabha1991@gmail.com"
+    }],
+    "require": {
+        "mailjet/mailjet-apiv3-php": "^1.6"
+    }
+}
