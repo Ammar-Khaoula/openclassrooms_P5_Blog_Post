@@ -108,6 +108,7 @@ class AdminController extends controller{
         return header('location: /openclassrooms_P5_Blog_Post/profil');
     }
 }
+// envoyer un email avec mailjet
     public function sendMessage(){
             define('API_USER', 'b6ec5c5caa3fe42382477ac17f66e1bc');
             define('API_LOGIN', 'e558f10c03958ac47c4ff219d9fd2f6c');
@@ -150,7 +151,26 @@ class AdminController extends controller{
             }
             return $this->view('admin.profil');
     }
+        //get all comment
+    public function getAllComment(){
+        $comment = $this->AdminService->getAllComment();
+        return $this->view('admin.listComment', compact('comment'));
+    }
+    //validate comment
+    public function validatComment(){
+        if(isset($_SESSION['users']) && $_SESSION['users']['isAdmin'] == 1){
+            $result = $this->AdminService->validatComment($_GET['idComment']);
+            if ($result){
+                //echo "ok";
+                return header('location: /openclassrooms_P5_Blog_Post/admin/listComment?success=true');
+            }else{
+                echo "pas ok";
+                return header('location: /openclassrooms_P5_Blog_Post');
     
-    
+            }
+        }
+       
+
+    }
     
 }

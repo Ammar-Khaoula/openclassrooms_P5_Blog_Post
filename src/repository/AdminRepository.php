@@ -80,4 +80,18 @@ class AdminRepository extends AbstractRepository
            return $statement->execute($data); 
     
     }
+        //getAllComment
+        public function getAllComment(){
+            $statement = $this->db->getPDO()->prepare("SELECT * FROM comment as c, users as u, posts as p WHERE idPost=c.postComment AND idUser=c.userComment  ORDER BY dateLastUpdateComment DESC");
+            $statement->setFetchMode(PDO::FETCH_CLASS, DetailsCommentesDTO::class);
+            $statement->execute(); 
+            return $statement->fetchAll();
+        }
+        //validat comment
+        public function validatComment(int $idComment){
+            $statement = $this->db->getPDO()->prepare("UPDATE comment SET validateComment=1 WHERE idComment= $idComment");
+            $statement->setFetchMode(PDO::FETCH_CLASS, DetailsCommentesDTO::class);
+            return $statement->execute(); 
+            
+        }
 }

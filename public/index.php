@@ -36,6 +36,8 @@ $router->get('/profil', 'Src\Controllers\AdminController@profil');
 $router->post('/profil', 'Src\Controllers\AdminController@sendMessage');
 $router->get('/admin/editProfil', 'Src\Controllers\AdminController@editProfil');
 $router->post('/admin/editProfil', 'Src\Controllers\AdminController@updateProfil');
+$router->get('/admin/listComment', 'Src\Controllers\AdminController@getAllComment');
+$router->post('/admin/listComment', 'Src\Controllers\AdminController@validatComment');
 
 // comment
 $router->get('/post/createComment', 'Src\Controllers\postController@createComments');

@@ -45,4 +45,11 @@ class AdminService
       }
         return $this->AdminRepository->updateProfil($idUser, $data, $pathPhoto);       
     }
+
+    public function getAllComment(){
+        return $this->AdminRepository->getAllComment();           
+    }
+    public function validatComment(int $idComment){
+        return $this->AdminRepository->validatComment($idComment);           
+    }
 }
