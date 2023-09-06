@@ -14,18 +14,20 @@ class User{
     private $photo;
 
 
-    public function getIdUser(){
+    public function getIdUser(): int
+    {
         return $this->idUser;
     }
-    public function setIdUser($idUser){
+    public function setIdUser(int $idUser){
         $this->idUser = $idUser;
+        return $this;
       
     }
     public function getPhoto() : string
     {
         return $this->photo;
     }
-    public function setPhoto($photo){
+    public function setPhoto(string $photo){
         $this->photo = $photo;
         return $this;
       
@@ -35,7 +37,7 @@ class User{
     {
         return $this->catchphrase;
     }
-    public function setCatchphrase(string $catchphrase):self
+    public function setCatchphrase(string $catchphrase)
     {
         $this->catchphrase = $catchphrase;
         return $this;
@@ -45,7 +47,7 @@ class User{
     {
         return $this->validate;
     }
-    public function setValidate($validate){
+    public function setValidate(bool $validate){
         $this->validate = $validate;
       
     }
@@ -58,43 +60,48 @@ class User{
         return $this;
         
     }
-    public function getMp(){
+    public function getMp(): string
+    {
         return $this->mp;
     }
     
-    public function setMp($mp){
+    public function setMp(string $mp){
         $this->mp = $mp;
         return $this;
     }
-    public function getFirstName(){
+    public function getFirstName(): string
+    {
         return $this->firstName;
     }
     
-    public function setFirstName($firstName){
+    public function setFirstName(string $firstName){
         $this->firstName = $firstName;
         return $this;
      
     }
-    public function getLastName(){
+    public function getLastName(): string
+    {
         return $this->lastName;
     }
     
-    public function setLastName($lastName){
+    public function setLastName(string $lastName){
         $this->lastName = $lastName;
         return $this;
         
     }
-    public function getIsAdmin(){
+    public function getIsAdmin(): bool
+    {
         return $this->isAdmin;
     }
     
-    public function setIsAadmin($isAdmin){
+    public function setIsAadmin(bool $isAdmin){
         $this->isAdmin = $isAdmin;
         return $this;
         
     }
     //create user session
-    public function setSession(){
+    public function setSession()
+    {
         $_SESSION['users'] = [
             'idUser' =>$this->idUser,
             'email' => $this->email,

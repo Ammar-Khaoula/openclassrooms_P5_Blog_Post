@@ -14,9 +14,11 @@ $router = new Router($_GET['url']);
 
 //posts Controllers
 $router->get('/', 'Src\Controllers\PostController@getAllPost');
+$router->get('/post', 'Src\Controllers\PostController@getPostById');
+
 
 try{
     $router->run();
-} catch(NotFoundException $e) {
+} catch(NotFoundException $e){
     return $e->error404();
 }

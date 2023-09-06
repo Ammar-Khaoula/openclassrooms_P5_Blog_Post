@@ -20,6 +20,12 @@ class PostController extends Controller
         return $this->view('blog.index', compact('posts'));
     }
 
+       //getPostById
+       public function getPostById(){
+        $post =  $this->postService->getPostById($_GET['idPost']);   
+        $this->view('blog.post', compact('post'));
+    }
+
      
     
 }

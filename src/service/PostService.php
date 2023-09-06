@@ -12,4 +12,7 @@ class PostService
     public function getAllpost(){
         return $this->PostRepository->getAllPosts();           
     }
+    public function getPostById(int $idPost){
+        return $this->PostRepository->getPostById($idPost);           
+    }
 }
