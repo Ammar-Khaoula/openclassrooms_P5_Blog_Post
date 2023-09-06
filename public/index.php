@@ -16,6 +16,13 @@ $router = new Router($_GET['url']);
 $router->get('/', 'Src\Controllers\PostController@getAllPost');
 $router->get('/post', 'Src\Controllers\PostController@getPostById');
 
+// Users controllers
+$router->get('/signup', 'Src\Controllers\UserController@signup');
+$router->post('/signup', 'Src\Controllers\UserController@signupPost');
+$router->get('/login', 'Src\Controllers\UserController@login');
+$router->post('/login', 'Src\Controllers\UserController@loginPost');
+$router->get('/logout', 'Src\Controllers\UserController@logout');
+
 
 try{
     $router->run();
