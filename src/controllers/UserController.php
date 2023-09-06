@@ -47,7 +47,7 @@ class UserController extends Controller{
             
             $user->setSession();
             if($user->getIsAdmin() && $user->getValidate() == 1){
-                header('location: '.$this->view('admin.index'));
+              header('location: /openclassrooms_P5_Blog_Post/admin/posts?success=true');
               }
               else if($user->getValidate() == 1)
               {

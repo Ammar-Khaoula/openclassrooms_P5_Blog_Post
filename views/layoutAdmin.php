@@ -9,8 +9,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark  bg-dark">
-    <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark  bg-dark bg-gradient">
+    <div class="container-fluid">
         <a class="navbar-brand" href="#">Blog</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -21,23 +21,32 @@
                 <a class="nav-link active" aria-current="page" href="/openclassrooms_P5_Blog_Post/profil">Accueil</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/openclassrooms_P5_Blog_Post">Articles</a>
+                <a class="nav-link" href="/openclassrooms_P5_Blog_Post/">Articles</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/openclassrooms_P5_Blog_Post/admin/posts">liste des artices</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/openclassrooms_P5_Blog_Post/admin/listUsers">liste des utilisateurs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/openclassrooms_P5_Blog_Post/admin/listComment">liste des commentaires</a></a>
             </li>
             <?php if(isset($_SESSION['users']) && !empty($_SESSION['users']['idUser'])): ?> 
-                <li class="nav-item">
-                    <a class="nav-link" href="/openclassrooms_P5_Blog_Post/logout">Déconnexion</a>
-                </li>
-            <?php else: ?> 
                     <li class="nav-item">
-                        <a class="nav-link" href="/openclassrooms_P5_Blog_Post/signup">S'inscrire\Se connecter</a>
+                        <a class="nav-link" href="/openclassrooms_P5_Blog_Post/logout">Déconnexion</a>
                     </li>
-            <?php endif;?>
+                <?php else: ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/openclassrooms_P5_Blog_Post/register">S'inscrire\Se connecter</a>
+                    </li>
+                    <?php endif;?>     
         </ul>
         </div>
     </div>
     </nav>
     <div class="container">
-    <?= $content?>
+       <?= $content?>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

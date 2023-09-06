@@ -23,6 +23,13 @@ $router->get('/login', 'Src\Controllers\UserController@login');
 $router->post('/login', 'Src\Controllers\UserController@loginPost');
 $router->get('/logout', 'Src\Controllers\UserController@logout');
 
+//admin controllers
+$router->get('/admin/posts', 'Src\Controllers\AdminController@getAllPosts');
+$router->get('/admin/createPost', 'Src\Controllers\AdminController@create');
+$router->post('/admin/addPost', 'Src\Controllers\AdminController@createPost');//
+$router->post('/admin/deletePost',     'Src\Controllers\AdminController@destroyPost');
+$router->get('/admin/editPost',     'Src\Controllers\AdminController@editPost');
+$router->post('/admin/updatePost',     'Src\Controllers\AdminController@updatePost');
 
 try{
     $router->run();

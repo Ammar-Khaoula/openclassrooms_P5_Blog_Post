@@ -2,15 +2,12 @@
 namespace Src\Controllers;
 
 abstract class Controller{
-    protected function isAdmin(){
+    protected function isAdmin(): bool{
         //we check if we are connected and if isAdmin = true
-        if(isset($_SESSION['users']) && $_SESSION['users']['is_admin'] == 1){
-            //we are admin
+        if(isset($_SESSION['users']) && $_SESSION['users']['isAdmin'] == 1){
             return true;
         }else{
-            //echo "not admin";
-            //we are not admin
-            header('location: /OpenClassrooms_P5_create_your_first_blog_in_php/?success=true');//message vous n'avez pas accés à cette zone
+            header('location: /openclassrooms_P5_Blog_Post/?success=true');
         }
     }
 
@@ -22,8 +19,11 @@ abstract class Controller{
                 $params = extract($params);
             }
             $content = ob_get_clean();
-           
-                require VIEWS . 'layout.php';
-            
+            if(isset($_SESSION['users']) && $_SESSION['users']['isAdmin'] == 1){
+                
+                require (VIEWS . 'layoutAdmin.php');
+            }else{
+                require (VIEWS . 'layout.php');
+            }
     }
 }
