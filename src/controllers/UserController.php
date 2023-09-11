@@ -29,9 +29,9 @@ class UserController extends Controller{
       
       $result = $this->userService->register($firstName, $lastName,$email,$mp);    
         if($result){
-            header('location: ' .$this->view('user.login')); 
+            header('location: /openclassrooms_P5_Blog_Post/login?success=true'); 
         }else{
-            header('location:../openclassrooms_P5_Blog_Post/signup?error=true'); 
+            header('location: /openclassrooms_P5_Blog_Post/signup?error=true'); 
         }
     }
     public function login(){
@@ -52,7 +52,7 @@ class UserController extends Controller{
               else if($user->getValidate() == 1)
               {
                 //auth/profil
-                header('location: /openclassrooms_P5_Blog_Post');
+                header('location: /openclassrooms_P5_Blog_Post/profil');
               }else{
                 header('location: /openclassrooms_P5_Blog_Post/login?error=true');
               }
@@ -62,6 +62,5 @@ class UserController extends Controller{
     public function logout(){
     unset($_SESSION['users']);
     header('location: /openclassrooms_P5_Blog_Post');
-    exit;
     }
 }

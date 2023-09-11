@@ -1,4 +1,4 @@
-<h1>Administrations des articles</h1>
+<h1 class="lists">Administrations des articles</h1>
 <?php if(isset($_GET['success'])): ?>
 <div class="alert alert-success">vous êtes connecté</div>
 <?php endif ?>
@@ -8,25 +8,23 @@
 <table class="table">
   <thead>  
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">author</th>
-      <th scope="col">titre</th>
-      <th scope="col">publie à</th>
-      <th scope="col">Actions</th>
+      <th class="col-3 text-info">author</th>
+      <th class="col-3 text-info">titre</th>
+      <th class="col-3 text-info">publie à</th>
+      <th class="col-3 text-info">Actions</th>
     </tr>
   </thead>
   <tbody>
   
         <?php foreach($params['posts'] as $post) : ?>
             <tr>
-                <th scope="row"><?= $post->getIdPost() ?></th>
                 <td><?= $post->getLastName() . ' '.$post->getFirstName() ?></td>
                 <td><?= $post->getTitle() ?></td>
                 <td><?= $post->getDateLastUpdate()?></td>
                 <td>
-                    <a href="/openclassrooms_P5_Blog_Post/admin/editPost?idPost=<?= $post->getIdPost() ?>" class="btn btn-warning">Modifier</a>
+                    <a href="/openclassrooms_P5_Blog_Post/admin/editPost?idPost=<?= $post->getIdPost() ?>" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     <form action="/openclassrooms_P5_Blog_Post/admin/deletePost?idPost=<?= $post->getIdPost() ?>" method="POST" class="d-inline">
-                        <button class="btn btn-danger">Supprimer</button>
+                        <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                     </form>
                 </td>
             </tr>

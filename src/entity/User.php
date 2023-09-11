@@ -49,7 +49,7 @@ class User{
     }
     public function setValidate(bool $validate){
         $this->validate = $validate;
-      
+      return $this;
     }
     public function getEmail() : string
     {

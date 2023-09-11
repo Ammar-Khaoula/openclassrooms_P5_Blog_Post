@@ -15,6 +15,7 @@ class DetailsArticleDTO{
     private $idUser;
     private $catchphrase;
     private $photo;
+    private $validate;
     
     public function getUserPost(): int
     {
@@ -36,6 +37,11 @@ class DetailsArticleDTO{
     {
         return $this->lastName;
     }
+    public function getValidate() : bool
+    {
+        return $this->validate;
+    }
+  
     public function getIdPost(): int
     {
         return $this->idPost;
@@ -71,13 +77,21 @@ class DetailsArticleDTO{
             'firstName' => $this->firstName,
             'lastName' => $this->lastName,
             'catchphrase' =>$this->catchphrase,
-            'photo' => $this->photo
+            'photo' => $this->photo,
+            'validate'=> $this->validate
         ];
             
     }
     public function getButton(): string{
-        return <<<HTML
-            <a href="/openclassrooms_P5_Blog_Post/post?idPost=$this->idPost" class="btn btn-info">lire l'article</a>
+        
+         if(isset($_SESSION['users']) && $this->getvalidate() == 1){
+            return <<<HTML
+             <a href="/openclassrooms_P5_Blog_Post/post?idPost=$this->idPost" class="btnRead">lire l'article</a>
         HTML;
+         }else{
+            return <<<HTML
+             <a href="/openclassrooms_P5_Blog_Post" class="btnRead">lire l'article</a>
+        HTML;
+         }
     }
 }
