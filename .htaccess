@@ -1,0 +1,7 @@
+# on démarre le moteur de reecriture
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-f
+
+#on reecrit l'url
+RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]

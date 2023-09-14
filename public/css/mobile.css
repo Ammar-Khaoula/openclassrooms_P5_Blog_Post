@@ -1,0 +1,57 @@
+.titlePost {
+    font-size: 15px;
+}
+
+.chapo {
+    font-size: 14px;
+}
+
+.date {
+    font-size: 10px;
+}
+
+.content {
+    font-size: 12px;
+}
+
+.lists {
+    font-size: 16px;
+}
+
+.size {
+    font-size: 10px;
+}
+
+
+/*register.php mobile*/
+
+#register h3 {
+    font-size: 14px;
+}
+
+#register h3 span {
+    font-size: 18px;
+}
+
+#register a {
+    font-size: 14px;
+    margin-left: 50px;
+}
+
+
+/*profil.php*/
+
+.profil a {
+    font-size: 18px;
+    padding: 10px;
+    margin: 5px;
+}
+
+.profil {
+    flex-direction: column;
+    text-align: center;
+}
+
+#cv {
+    margin-bottom: 10px;
+}

@@ -1,0 +1,177 @@
+#footer {
+    text-align: center;
+    margin: 20px auto;
+}
+
+#footer a {
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-weight: bolder;
+    color: #F2BF27;
+}
+
+.titlePost {
+    color: #42708C;
+    text-transform: capitalize;
+}
+
+.lists {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin: 20px;
+    color: rgb(156, 179, 240);
+}
+
+.btnRead {
+    padding: .8rem 1.7rem;
+    border: 0px solid black;
+    border-radius: 5px;
+    transition: 0.5s;
+    display: inline-block;
+    text-decoration: none;
+    background-size: 200%;
+    background-image: linear-gradient( to right, #fbdc88, #F2BF27, #fbdc88);
+    color: white;
+    font-weight: bold;
+}
+
+.btnRead:hover {
+    background-position: right;
+    color: aliceblue;
+}
+
+
+/*register.php*/
+
+#register h3 {
+    text-align: center;
+    margin: 20px;
+    color: #42708C;
+}
+
+#register h3 span {
+    font-size: 50px;
+}
+
+.connect {
+    padding: .8rem 1.7rem;
+    border: 0px solid black;
+    border-radius: 5px;
+    font-size: 20px;
+    transition: 0.5s;
+    display: inline-block;
+    text-decoration: none;
+    background-size: 200%;
+    background-image: linear-gradient( to right, #fbdc88, #3a6887, #fbdc88);
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    margin-left: 250px;
+    margin-bottom: 15px;
+}
+
+.connect:hover {
+    background-position: right;
+    color: aliceblue;
+}
+
+#register form {
+    border: 5px #F2BE5C solid;
+    padding: 25px;
+    box-shadow: 3px 3px 10px 0px #D9AD77;
+}
+
+#register form button {
+    margin-top: 10px;
+    background: linear-gradient(to right, #42708C, #F2BF27);
+    border: 0px solid black;
+    font-weight: bold;
+}
+
+
+/*login.php*/
+
+#login form {
+    border: 5px #F2BE5C solid;
+    padding: 25px;
+    box-shadow: 3px 3px 10px 0px #D9AD77;
+    margin-top: 40px;
+}
+
+#login form button {
+    margin-top: 10px;
+    background: linear-gradient(to right, #F2BF27, #42708C);
+    border: 0px solid black;
+    font-weight: bold;
+}
+
+
+/*profil.php*/
+
+#profil form {
+    border: 5px #F2BE5C solid;
+    padding: 25px;
+    box-shadow: 3px 3px 10px 0px #D9AD77;
+    margin-top: 40px;
+}
+
+#profil form h2 {
+    color: #42708C;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+#profil form button {
+    padding: .8rem 1.7rem;
+    border: 0px solid black;
+    border-radius: 5px;
+    transition: 0.5s;
+    display: inline-block;
+    background-size: 200%;
+    background-image: linear-gradient( to right, #F2BF27, #8C521F, #F2BF27);
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+#profil form button:hover {
+    background-position: right;
+    color: aliceblue;
+}
+
+.profil a {
+    text-decoration: none;
+    font-size: 30px;
+    padding: 10px;
+    color: white;
+}
+
+.profil a:hover {
+    color: #42708C;
+}
+
+.profil {
+    background: #D9AD77;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+#cv a {
+    border: 0px solid black;
+    border-radius: 50%;
+    background: white;
+    color: #D9AD77;
+}
+
+#cv a:hover {
+    background: #42708C;
+}
+
+#profil h2 {
+    text-align: center;
+    margin-top: 20px;
+    color: #42708C;
+    letter-spacing: 4px;
+}
