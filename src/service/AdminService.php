@@ -2,6 +2,7 @@
 namespace Src\service;
 use Src\repository\AdminRepository;
 use Src\entity\Comment;
+use Src\entity\User;
 
 class AdminService
 {
@@ -11,28 +12,33 @@ class AdminService
     public function __construct(){
         $this->AdminRepository =  new AdminRepository();
     }
-    public function getAdmin(){
+    public function getAdmin(): User
+    {
         return  $this->AdminRepository->getAdmin();    
     }
-    public function validat(int $idUser){
+    public function validat(int $idUser): bool
+    {
         return $this->AdminRepository->validat($idUser);           
     }
-    public function createPost(string $title, string $chapo, string $content, int $userPost){
+    public function createPost(string $title, string $chapo, string $content, int $userPost): bool
+    {
         return $this->AdminRepository->createPost($title, $chapo, $content, $userPost);           
     }
-
-    public function updatePost(int $idPost, array $data){
+    public function updatePost(int $idPost, array $data): bool
+    {
         return $this->AdminRepository->updatePost($idPost, $data);       
     }
 
-    public function destroyPost(int $idPost){
+    public function destroyPost(int $idPost): bool
+    {
         return $this->AdminRepository->destroyPost($idPost);       
     }
-    public function getAllUsers(){
+    public function getAllUsers(): array
+    {
         return $this->AdminRepository->getAllUsres();           
     }
-   
-    public function updateProfil(int $idUser, array $data){
+    public function updateProfil(int $idUser, array $data): bool
+    {
         $pathPhoto="";
         if(!empty($_FILES['photo']['full_path']) && $_FILES['photo']['size'] <= 3000000){
           $infoImage = pathinfo($_FILES['photo']['name']);
@@ -46,10 +52,13 @@ class AdminService
         return $this->AdminRepository->updateProfil($idUser, $data, $pathPhoto);       
     }
 
-    public function getAllComment(){
+    public function getAllComment(): array
+    {
         return $this->AdminRepository->getAllComment();           
     }
-    public function validatComment(int $idComment){
+    public function validatComment(int $idComment): bool
+    {
         return $this->AdminRepository->validatComment($idComment);           
     }
+
 }

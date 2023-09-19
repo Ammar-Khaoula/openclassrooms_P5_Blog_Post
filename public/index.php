@@ -21,7 +21,7 @@ $router->get('/signup', 'Src\Controllers\UserController@signup');
 $router->post('/signup', 'Src\Controllers\UserController@signupPost');
 $router->get('/login', 'Src\Controllers\UserController@login');
 $router->post('/login', 'Src\Controllers\UserController@loginPost');
-$router->get('/logout', 'Src\Controllers\UserController@logout');
+$router->get('/logout', 'Src\Controllers\UserController@deconnection');
 
 //admin controllers
 $router->get('/admin/posts', 'Src\Controllers\AdminController@getAllPosts');

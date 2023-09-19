@@ -13,7 +13,6 @@ class User{
     private $catchphrase;
     private $photo;
 
-
     public function getIdUser(): int
     {
         return $this->idUser;
@@ -100,7 +99,7 @@ class User{
         
     }
     //create user session
-    public function setSession()
+    public function setSession(): void
     {
         $_SESSION['users'] = [
             'idUser' =>$this->idUser,
@@ -109,8 +108,7 @@ class User{
             'lastName' => $this->lastName,
             'catchphrase' =>$this->catchphrase,
             'photo' => $this->photo,
-            'isAdmin'=> $this->isAdmin
-        ];
-        
+            'isAdmin'=> $this->isAdmin,        
+        ];      
     } 
 }

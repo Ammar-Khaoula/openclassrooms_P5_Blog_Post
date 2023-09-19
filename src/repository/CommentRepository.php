@@ -37,7 +37,6 @@ class CommentRepository extends AbstractRepository
                 $i++;   
         }
         $data['idComment'] = $idComment;
-    
             $statement = $this->db->getPDO()->prepare("UPDATE comment SET {$sqlRequestPart} WHERE idComment = :idComment"); 
             $statement->setFetchMode(PDO::FETCH_CLASS, Comment::class);
             return $statement->execute($data);  

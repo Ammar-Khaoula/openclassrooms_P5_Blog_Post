@@ -18,7 +18,7 @@ class CommentService
         return $this->commentRepository->createComment($contentComment, $postComment, $userComment);           
     }
     public function updateComment(int $idComment, array $data){
-        return $this->commentRepository->updateComment($idComment, $data);       
+        return $this->commentRepository->updateComment($idComment,$data );       
     }
     public function destroyComment(int $id){
         return $this->commentRepository->destroyComment($id);       
