@@ -1,6 +1,7 @@
 <h1>créer un nouvel article</h1>
 
 <form action="/openclassrooms_P5_Blog_Post/admin/addPost" method="POST" class="m-2">
+<input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"> 
     <div class="form-group mt-4">
         <label for="title">titre de l'article</label>
         <input type="text" class="form-control" name="title" id="title" value="">        

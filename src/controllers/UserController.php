@@ -35,32 +35,37 @@ class UserController extends Controller{
         }
     }
     public function login(){
+      $this->createToken();
       return $this->view('user.login');
     }
     public function loginPost(){
+    $this->validateToken();
         $is_auth = false;
         $user =  $this->userService->getUserByEmail(strip_tags($_POST['email']));
           if(!is_null($user) && !empty($user) && password_verify($_POST['mp'], $user->getMp())){ 
             $is_auth = true;
           }
-          if($is_auth){
-            
+          if($is_auth){  
             $user->setSession();
             if($user->getIsAdmin() && $user->getValidate() == 1){
               header('location: /openclassrooms_P5_Blog_Post/admin/posts?success=true');
               }
               else if($user->getValidate() == 1)
               {
-                //auth/profil
                 header('location: /openclassrooms_P5_Blog_Post/profil');
               }else{
                 header('location: /openclassrooms_P5_Blog_Post/login?error=true');
               }
+          }else{
+            die("Tentative de CSRF détectée !");
+            header('location: /openclassrooms_P5_Blog_Post/login?message=true');
           }
     }
     //disconnect the user
-    public function logout(){
-    unset($_SESSION['users']);
-    header('location: /openclassrooms_P5_Blog_Post');
+    public function deconnection(): void
+    {
+        session_unset();
+        session_destroy();
+        header('location: '.$_SERVER['HTTP_REFERER']);
     }
 }

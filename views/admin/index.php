@@ -24,6 +24,7 @@
                 <td>
                     <a href="/openclassrooms_P5_Blog_Post/admin/editPost?idPost=<?= $post->getIdPost() ?>" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     <form action="/openclassrooms_P5_Blog_Post/admin/deletePost?idPost=<?= $post->getIdPost() ?>" method="POST" class="d-inline">
+                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                         <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                     </form>
                 </td>

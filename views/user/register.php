@@ -6,7 +6,8 @@
         <div class="alert alert-danger">cette adresse email est déjà prise</div>
       <?php endif ?>
     <form class="row row-cols-lg-auto g-1 align-items-center" action="/openclassrooms_P5_Blog_Post/signup" method="POST">
-    <div class="col-md-10">
+    
+      <div class="col-md-10">
         <label for="inputfirestName" class="form-label">Prenom</label>
         <input type="text" class="form-control" id="inputfirstName" name="firstName" required>
       </div>
