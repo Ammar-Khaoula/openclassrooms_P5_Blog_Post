@@ -1,6 +1,7 @@
 <?php
 namespace Src\service;
 use Src\repository\PostRepository;
+use Src\entity\DetailsArticleDTO;
 
 class PostService
 {
@@ -9,10 +10,12 @@ class PostService
         $this->PostRepository =  new PostRepository();
     }
 
-    public function getAllpost(){
+    public function getAllpost(): array
+    {
         return $this->PostRepository->getAllPosts();           
     }
-    public function getPostById(int $idPost){
+    public function getPostById(int $idPost): DetailsArticleDTO
+    {
         return $this->PostRepository->getPostById($idPost);           
     }
 }

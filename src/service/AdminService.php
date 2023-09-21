@@ -20,9 +20,9 @@ class AdminService
     {
         return $this->AdminRepository->validat($idUser);           
     }
-    public function createPost(string $title, string $chapo, string $content, int $userPost): bool
+    public function createPost(string $title, string $chapo, string $content, string $auteur, int $userPost): bool
     {
-        return $this->AdminRepository->createPost($title, $chapo, $content, $userPost);           
+        return $this->AdminRepository->createPost($title, $chapo, $content, $auteur, $userPost);           
     }
     public function updatePost(int $idPost, array $data): bool
     {

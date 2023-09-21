@@ -7,8 +7,12 @@
         <input type="text" class="form-control" name="title" id="title" value="">        
     </div>
     <div class="form-group mt-4">
-        <label for="title">chapo</label>
+        <label for="chapo">chapo</label>
         <input type="text" class="form-control" name="chapo" id="title" value="">        
+    </div>
+    <div class="form-group mt-4">
+        <label for="auteur">auteur</label>
+        <input type="text" class="form-control" name="auteur" id="auteur" value="">        
     </div>
     <div class="form-group mt-4">
         <label for="content">contenu de l'article</label>

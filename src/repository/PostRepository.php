@@ -6,13 +6,15 @@ use Src\repository\AbstractRepository;
 
 class PostRepository extends AbstractRepository
 {
-    public function getAllPosts(){
+    public function getAllPosts(): array
+    {
         $statement = $this->db->getPDO()->prepare("SELECT * FROM posts as p, users as u WHERE p.userPost = u.idUser ORDER BY dateLastUpdatePost DESC");
         $statement->setFetchMode(PDO::FETCH_CLASS, DetailsArticleDTO::class);
         $statement->execute(); 
         return $statement->fetchAll();
     }
-    public function getPostById(int $idPost){
+    public function getPostById(int $idPost): DetailsArticleDTO
+    {
         $statement =  $this->db->getPDO()->prepare("SELECT * FROM posts as p, users as u WHERE p.userPost = u.idUser AND idPost = ?");
         $statement->setFetchMode(PDO::FETCH_CLASS, DetailsArticleDTO::class);
         $statement->execute(array($idPost)); 

@@ -15,6 +15,7 @@
       
             <?php foreach($params['users'] as $user) : ?>
               <form action="/openclassrooms_P5_Blog_Post/admin/listUsers?idUser=<?= $user->getIdUser() ?>" method="POST">
+              <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                 <tr>
                     <th scope="row"><?= $user->getIdUser() ?></th>
                     <td><?= $user->getLastName() . ' '.$user->getFirstName() ?></td>

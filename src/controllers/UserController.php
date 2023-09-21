@@ -12,10 +12,12 @@ class UserController extends Controller{
     public function __construct(){
         $this->userService =  new UserService();
     }
-    public function signup(){
-        return $this->view('user.register');
+    public function signup(): void
+    {
+        $this->view('user.register');
     }
-    public function signupPost(){
+    public function signupPost(): bool
+    {
       $firstName = strip_tags($_POST['firstName']);
       $lastName = strip_tags($_POST['lastName']);
       $email = strip_tags($_POST['email']);
@@ -27,27 +29,30 @@ class UserController extends Controller{
       $user->setEmail($email);
       $user->setMp($mp);
       
-      $result = $this->userService->register($firstName, $lastName,$email,$mp);    
+      $result= $this->userService->register($firstName, $lastName,$email,$mp);    
         if($result){
-            header('location: /openclassrooms_P5_Blog_Post/login?success=true'); 
+            header('location: /openclassrooms_P5_Blog_Post/login?success=true');
+            return true;
         }else{
             header('location: /openclassrooms_P5_Blog_Post/signup?error=true'); 
+            return false;
         }
     }
-    public function login(){
+    public function login(): void
+    {
       $this->createToken();
-      return $this->view('user.login');
+       $this->view('user.login');
     }
-    public function loginPost(){
-    $this->validateToken();
+    public function loginPost(): bool
+    {
+      $this->validateToken();
         $is_auth = false;
         $user =  $this->userService->getUserByEmail(strip_tags($_POST['email']));
-          if(!is_null($user) && !empty($user) && password_verify($_POST['mp'], $user->getMp())){ 
-            $is_auth = true;
-          }
-          if($is_auth){  
+        if(!is_null($user) && !empty($user) && password_verify($_POST['mp'], $user->getMp())){
+          $is_auth = true;
+          if($is_auth){ 
             $user->setSession();
-            if($user->getIsAdmin() && $user->getValidate() == 1){
+            if($this->isAdmin() && $user->getValidate() == 1){
               header('location: /openclassrooms_P5_Blog_Post/admin/posts?success=true');
               }
               else if($user->getValidate() == 1)
@@ -56,16 +61,17 @@ class UserController extends Controller{
               }else{
                 header('location: /openclassrooms_P5_Blog_Post/login?error=true');
               }
-          }else{
-            die("Tentative de CSRF détectée !");
-            header('location: /openclassrooms_P5_Blog_Post/login?message=true');
           }
+        }else{
+          header('location: /openclassrooms_P5_Blog_Post/login?message=true');
+          return false;
+        }
     }
     //disconnect the user
     public function deconnection(): void
     {
         session_unset();
         session_destroy();
-        header('location: '.$_SERVER['HTTP_REFERER']);
+        header('location: /openclassrooms_P5_Blog_Post');
     }
 }
