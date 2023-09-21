@@ -17,107 +17,109 @@ class AdminController extends controller{
         $this->AdminService =  new AdminService();
         $this->postService =  new PostService();
     }  
-    public function validat()
+    public function validat(): bool
     {
-        if(isset($_SESSION['users']) && !empty($_SESSION['users']['idUser'])){
-            $result = $this->AdminService->validat($_GET['idUser']);
-            if ($result){
-                header('location: '.$_SERVER['HTTP_REFERER']);
-            }else{
-            echo "pas ok";
-            }
+        $this->validateToken();
+        $result = $this->AdminService->validat($_GET['idUser']);
+        if ($result){
+            header('location: '.$_SERVER['HTTP_REFERER']);
+        }else{
+            return false;
         }
     }
+    
       // get post admin
     public function getAllPosts()
     {
         $posts = $this->postService->getAllpost();
         return $this->view('admin.index', compact('posts'));   
     }
+
     //return the form
-    public function create()
+    public function create(): void
     {
-        return $this->view('admin.creatPost');
+        $this->view('admin.creatPost');
     } 
+
     //process the data send in post
-    public function createPost()
+    public function createPost(): bool
     {
         $this->validateToken();
+
         $title = strip_tags($_POST['title']);
         $chapo = strip_tags($_POST['chapo']);
         $content = strip_tags($_POST['content']);
+        $auteur = strip_tags($_POST['auteur']);
         $idUser =  $_SESSION['users']['idUser'];
-        //check that user is logged in
-        if(isset($_SESSION['users']) && !empty($_SESSION['users']['idUser'])){
         //we instantiate our model
         $article = new Post;
             //we hydrate
             $article->setTitle($title);
             $article->setChapo($chapo);
             $article->setContent($content);
-            $article->setUserPost($_SESSION['users']['idUser']);
     
-            $result = $this->AdminService->createPost($title, $chapo, $content, $idUser);
+            $result = $this->AdminService->createPost($title, $chapo, $content, $auteur, $idUser);
             if($result){
                 header('location: /openclassrooms_P5_Blog_Post/admin/posts');
             }else{
-                echo "nn";
-            }
-        }       
+                return false;
+            }     
     }
-    public function editPost()
+    public function editPost(): void
     { 
         $post =  $this->postService->getPostById($_GET['idPost']);
-        return $this->view('admin.editPost', compact('post'));
+        $this->view('admin.editPost', compact('post'));
     }
-    public function updatePost()
+    public function updatePost(): bool
     {
-        if(isset($_SESSION['users']) && !empty($_SESSION['users']['idUser'])){          
+        if (!is_null($this->isAdmin()) && !empty($this->isAdmin())){          
             $result = $this->AdminService->updatePost($_GET['idPost'], $_POST);
             if($result){
                 header('location: /openclassrooms_P5_Blog_Post/admin/posts');
             }
         }else{
-            http_response_code(404);
             header('location: /openclassrooms_P5_Blog_Post?error=true');
+            return false;
         }
     }
         //delete post
-    public function destroyPost()
+    public function destroyPost(): bool
     {
         $this->validateToken();
         $result = $this->AdminService->destroyPost($_GET['idPost']);
             if($result){
                 header('location: /openclassrooms_P5_Blog_Post/admin/posts');
+                return true;
             }
     }
     //get all users
-    public function getAllUsers()
+    public function getAllUsers(): void
     {
         $users = $this->AdminService->getAllUsers();
-        return $this->view('admin.listUsers', compact('users'));
+        $this->view('admin.listUsers', compact('users'));
     }
-    public function profil()
+    public function profil(): void
     {
         $admin = $this->AdminService->getAdmin();
-        return $this->view('admin.profil', compact('admin'));
+        $this->view('admin.profil', compact('admin'));
     }
     //update profil
-    public function editProfil()
+    public function editProfil(): void
     {
         if($this->isAdmin());
             $admin = $this->AdminService->getAdmin();
-        return $this->view('admin.editProfil', compact('admin'));
+            $this->view('admin.editProfil', compact('admin'));
     }
-    public function updateProfil()
+    public function updateProfil(): bool
     {
         $result = $this->AdminService->updateProfil($_GET['idUser'], $_POST);
         if($result){
             header('location: /openclassrooms_P5_Blog_Post/profil');
+            return true;
         }
     }
     // envoyer un email avec mailjet
-    public function sendMessage()
+    public function sendMessage(): void
     {
             define('API_USER', 'b6ec5c5caa3fe42382477ac17f66e1bc');
             define('API_LOGIN', 'e558f10c03958ac47c4ff219d9fd2f6c');
@@ -158,23 +160,24 @@ class AdminController extends controller{
             }else{
                 header('location: /openclassrooms_P5_Blog_Post/');
             }
-            return $this->view('admin.profil');
+                $this->view('admin.profil');
     }
         //get all comment
-    public function getAllComment()
+    public function getAllComment(): void
     {
         $comment = $this->AdminService->getAllComment();
-        return $this->view('admin.listComment', compact('comment'));
+        $this->view('admin.listComment', compact('comment'));
     }
     //validate comment
-    public function validatComment()
+    public function validatComment(): bool
     {
-        if(isset($_SESSION['users']) && $_SESSION['users']['isAdmin'] == 1){
+        if($this->isAdmin()){
             $result = $this->AdminService->validatComment($_GET['idComment']);
             if ($result){
                     header('location: /openclassrooms_P5_Blog_Post/admin/listComment?success=true');
             }else{
                 header('location: /openclassrooms_P5_Blog_Post');
+                return false;
     
             }
         }

@@ -6,14 +6,14 @@
   <?php endif ?>
 
 <?php foreach($params['posts'] as $post) : ?>
-<div class="card m-4 ">
-    <div class="card-body" >
+<div class="card m-4">
+    <div class="card-body postsAll">
         <div class="d-flex p-2" style="justify-content: space-between;">
-            <h2 class="card-title titlePost"><?= $post->getTitle() ?></h2>
-            <small class="date">Publié le <?= $post->getDateLastUpdate() ?></small> 
+            <h2 class="card-title titlePost" style="width: 80%;"><?= $post->getTitle() ?></h2>
+            <small class="date text-primary" style="width: 20%;"><?= $post->getDateLastUpdate() ?></small> 
         </div> 
         <input type="hidden" name="idPost" value="<?= $post->getIdPost(); ?>">
-        <h5 class="text-secondary chapo"><?= $post->getChapo() ?></h5>
+        <p class="text-secondary chapo"><?= $post->getChapo() ?></p>
           <?= $post->getButton()?>
     </div>   
 </div>

@@ -28,10 +28,10 @@ class AdminRepository extends AbstractRepository
         
     }
     //create Post
-    public function createPost(string $title, string $chapo, string $content, int $userPost): bool
+    public function createPost(string $title, string $chapo, string $content, string $auteur, int $userPost): bool
     {
-        $req = $this->db->getPDO()->prepare("INSERT INTO posts (title, chapo, content, userPost) VALUES (?, ?, ?, ?)");
-        return  $req->execute(array($title, $chapo, $content, $userPost)); 
+        $req = $this->db->getPDO()->prepare("INSERT INTO posts (title, chapo, content, auteur, userPost) VALUES (?, ?, ?, ?, ?)");
+        return  $req->execute(array($title, $chapo, $content, $auteur, $userPost)); 
     }
     //update Post
     public function updatePost(int $idPost, array $data): bool

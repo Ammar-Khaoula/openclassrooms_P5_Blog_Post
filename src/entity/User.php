@@ -17,36 +17,35 @@ class User{
     {
         return $this->idUser;
     }
-    public function setIdUser(int $idUser){
+    public function setIdUser(int $idUser): self
+    {
         $this->idUser = $idUser;
         return $this;
-      
     }
-    public function getPhoto() : string
+    public function getPhoto(): string
     {
         return $this->photo;
     }
-    public function setPhoto(string $photo){
+    public function setPhoto(string $photo): self
+    {
         $this->photo = $photo;
         return $this;
-      
-      
     }
     public function getCatchphrase() : string
     {
         return $this->catchphrase;
     }
-    public function setCatchphrase(string $catchphrase)
+    public function setCatchphrase(string $catchphrase): self
     {
         $this->catchphrase = $catchphrase;
         return $this;
-      
     }
     public function getValidate() : bool
     {
         return $this->validate;
     }
-    public function setValidate(bool $validate){
+    public function setValidate(bool $validate): self
+    {
         $this->validate = $validate;
       return $this;
     }
@@ -54,7 +53,8 @@ class User{
     {
         return $this->email;
     }
-    public function setEmail(string $email){
+    public function setEmail(string $email): self
+    {
         $this->email = $email;
         return $this;
         
@@ -64,7 +64,8 @@ class User{
         return $this->mp;
     }
     
-    public function setMp(string $mp){
+    public function setMp(string $mp): self
+    {
         $this->mp = $mp;
         return $this;
     }
@@ -73,7 +74,8 @@ class User{
         return $this->firstName;
     }
     
-    public function setFirstName(string $firstName){
+    public function setFirstName(string $firstName): self
+    {
         $this->firstName = $firstName;
         return $this;
      
@@ -83,7 +85,8 @@ class User{
         return $this->lastName;
     }
     
-    public function setLastName(string $lastName){
+    public function setLastName(string $lastName): self
+    {
         $this->lastName = $lastName;
         return $this;
         
@@ -93,13 +96,14 @@ class User{
         return $this->isAdmin;
     }
     
-    public function setIsAadmin(bool $isAdmin){
+    public function setIsAadmin(bool $isAdmin): self
+    {
         $this->isAdmin = $isAdmin;
         return $this;
         
     }
     //create user session
-    public function setSession(): void
+    public function setSession()
     {
         $_SESSION['users'] = [
             'idUser' =>$this->idUser,

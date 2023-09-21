@@ -15,7 +15,8 @@ class DetailsCommentesDTO{
     private $title;
 
     
-    public function getDateLastUpdateComment(){
+    public function getDateLastUpdateComment(): string
+    {
         return (new DateTime($this->dateLastUpdateComment))->format('d/m/y à H:i');       
     }
     public function getTitle(): string
