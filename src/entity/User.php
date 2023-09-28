@@ -103,7 +103,7 @@ class User{
         
     }
     //create user session
-    public function setSession()
+    public function setSession(): void
     {
         $_SESSION['users'] = [
             'idUser' =>$this->idUser,

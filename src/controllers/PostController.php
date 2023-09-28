@@ -47,46 +47,44 @@ class PostController extends Controller
             $contentComment = strip_tags($_POST['contentComment']);
             $userComment =  $_SESSION['users']['idUser'];//$id_user =  $_GET['idUser']
             $postComment  = $_GET['idPost'];
+            $post =  $this->postService->getPostById($_GET['idPost']);   
+            $comment = $this->commentService->getCommentsByPostId($_GET['idPost']);
             $result = $this->commentService->createComment($contentComment, $postComment , $userComment);   
                 if($result){
-                    header('location: /openclassrooms_P5_Blog_Post/post?idPost='.$postComment );
-                    return true;
+                    $this->view('blog.post', compact('post', 'comment'));                    return true;
                 }else{
                     return false;
                 }
     }
         //get comment by id
-    public function commentbById()
+    public function commentbById(): void
     {
-        $comment = $this->commentService->getCommentById($_GET['idComment']);
-        if($comment->getUserComment () !== $_SESSION['users']['idUser']){
+        $comments = $this->commentService->getCommentById($_GET['idComment']);
+        if($comments->getUserComment () !== $_SESSION['users']['idUser']){
             header('location: '.$_SERVER['HTTP_REFERER']);
         }
-        $this->view('blog.editComment', compact('comment'));
+        $this->view('blog.editComment', compact('comments'));
     }
 
     //update Comment
-    public function updateComment(): bool
+    public function updateComment(): void
     {
             $result = $this->commentService->updateComment($_GET['idComment'], $_POST);
         if($result){
-            header('location: /openclassrooms_P5_Blog_Post');
-            return  true;
+            echo "votre commentaire est modifier avec succes"; 
         }        
     }
        //delete comment
-    public function destroyComment(): bool
+    public function destroyComment(): void
     { 
        $comment = $this->commentService->getCommentById($_GET['idComment']);
         if($_SESSION['users']['idUser'] == $comment->getUserComment()){
             $result = $this->commentService->destroyComment($_GET['idComment']);
             if($result){   
                 header('location: '.$_SERVER['HTTP_REFERER']);
-                return true;
             }
             }else{
                 header('location: '.$_SERVER['HTTP_REFERER']);
-                return false;
             }
     }
 

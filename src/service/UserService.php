@@ -25,6 +25,9 @@ class UserService{
     //login
     public function getUserByEmail(): User
     {
-        return  $this->userRepository->getUserByEmail();    
+            $email = true;
+            if($email){
+                return $this->userRepository->getUserByEmail();
+            }
     }
 }

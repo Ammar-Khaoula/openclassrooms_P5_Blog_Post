@@ -1,14 +1,18 @@
 <?php
 namespace Src\repository;
-
+use PDO;
 use Database\DbConnection;
 
 abstract class AbstractRepository
 {
-    protected $db;
+    /**
+     * @var PDO Contains the connection to the database
+     */
+    protected PDO $db;
     
-   public function __construct(){
-        $this->db =  new DbConnection('first_blog_php', '127.0.0.1', 'root', '') or die("Unable to connection. Check connection parameters");
+    public function __construct()
+    {
+        $this->db = DbConnection :: getPDO();
     }
     
 }

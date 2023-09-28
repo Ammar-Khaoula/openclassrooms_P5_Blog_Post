@@ -1,7 +1,7 @@
 <?php
 namespace Src\Controllers;
-
-abstract class Controller{
+abstract class Controller
+{
 
     //we check if we are connected and if isAdmin = true
     protected function isAdmin(): bool
@@ -12,18 +12,17 @@ abstract class Controller{
             return false;
         }
     }
-
-    protected function createToken()
+    protected function createToken(): void
     {
         if (!isset($_SESSION['csrf_token'])) {
             $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
             $_SESSION['csrf_token_time'] = time();
           }
     }
-    protected function validateToken()
+    protected function validateToken(): void
     {
         if ($_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-            die("problem whith CSRF token");
+            echo "problem whith CSRF token";
           }else{
             $max_time = 60*60*24;
             if (isset($_SESSION['csrf_token_time'])){
@@ -33,13 +32,13 @@ abstract class Controller{
                 }else{
                     unset($_SESSION['csrf_token']);
                     unset($_SESSION['csrf_token_time']);
-                    die ("CSRF Token expired");
+                    echo "CSRF Token expired";
                 }
             }
           }
     }
 
-    public function view(string $path, array $params = null)
+    public function view(string $path, array $params = null): void
     {
         ob_start();
         $path = str_replace('.', DIRECTORY_SEPARATOR, $path);
