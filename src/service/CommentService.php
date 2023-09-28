@@ -1,7 +1,7 @@
 <?php
 namespace Src\service;
 use Src\repository\CommentRepository;
-use Src\entity\DetailsCommentesDTO;
+use Src\entity\Comment;
 
 class CommentService
 {
@@ -14,7 +14,7 @@ class CommentService
     {
         return $this->commentRepository->getCommentsByPostId($idPost);           
     }
-    public function getCommentById(int $idComment)
+    public function getCommentById(int $idComment): Comment
     {
         return $this->commentRepository->getCommentById($idComment);           
     }

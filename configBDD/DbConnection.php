@@ -3,28 +3,50 @@
 namespace Database;
 use PDO;
 
+/**
+ * Class used to create an instance of the database connection
+ */
+
 class DbConnection
 {
-    private $db_name;
-    private $db_user;
-    private $db_pass;
-    private $db_host;
-    private $pdo;
+    /**
+     * @var null|object $instance Property used to define if an instance of the connection already exists
+     */
+    private static $instance = null;
 
-    public function __construct(string $db_name, string $db_host, string $db_user, string $db_pass)
-    {
-        $this->db_name = $db_name;
-        $this->db_host = $db_host;
-        $this->db_user = $db_user;
-        $this->db_pass = $db_pass;
-    }
-public function getPDO() : PDO{
-    return $this->pdo ?? $this->pdo = new PDO("mysql:dbname={$this->db_name};host={$this->db_host}", $this->db_user, $this->db_pass, [
+    /**
+     * @var string Define DBMS, database and host used for connect database
+     */
+    private const DSN = 'mysql:dbname=first_blog_php;host=localhost';
+    /**
+     * @var string Define username used for connect database
+     */
+    private const USERNAME = 'root';
+    /**
+     * @var string Define password used for connect database
+     */
+    private const PASSWORD = '';
+
+
+    /**
+     * Connect to the database and returns the connection
+     *
+     * @return PDO object
+     */
+public  static function getPDO() : PDO
+{
+    if (self::$instance === null) {
+        self::$instance = new PDO(
+            self::DSN,
+            self::USERNAME,
+            self::PASSWORD,
+    [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
         PDO::MYSQL_ATTR_INIT_COMMAND => 'SET CHARACTER SET UTF8'
     ]);
-
+    }
+    return self::$instance;
 }
 
 }

@@ -12,7 +12,7 @@ class AdminRepository extends AbstractRepository
     // get Admin
     public function getAdmin(): User 
     {
-        $req = $this->db->getPDO()->prepare("SELECT * FROM users WHERE isAdmin = 1");
+        $req = $this->db->prepare("SELECT * FROM users WHERE isAdmin = 1");
         $req->setFetchMode(PDO::FETCH_CLASS, User::class);
         $req->execute(); 
         return $req->fetch();
@@ -20,7 +20,7 @@ class AdminRepository extends AbstractRepository
      //validat user
     public function validat(int $idUser): bool
     {
-        $statement = $this->db->getPDO()->prepare("UPDATE users SET validate=1 WHERE idUser= :idUser");
+        $statement = $this->db->prepare("UPDATE users SET validate=1 WHERE idUser= :idUser");
         //injection SQL
         $statement->bindValue(':idUser', $idUser, PDO::PARAM_INT);
         $statement->setFetchMode(PDO::FETCH_CLASS, User::class);
@@ -30,7 +30,7 @@ class AdminRepository extends AbstractRepository
     //create Post
     public function createPost(string $title, string $chapo, string $content, string $auteur, int $userPost): bool
     {
-        $req = $this->db->getPDO()->prepare("INSERT INTO posts (title, chapo, content, auteur, userPost) VALUES (?, ?, ?, ?, ?)");
+        $req = $this->db->prepare("INSERT INTO posts (title, chapo, content, auteur, userPost) VALUES (?, ?, ?, ?, ?)");
         return  $req->execute(array($title, $chapo, $content, $auteur, $userPost)); 
     }
     //update Post
@@ -44,14 +44,14 @@ class AdminRepository extends AbstractRepository
                     $i++;               
             }
             $data['idPost'] = $idPost;       
-            $statement = $this->db->getPDO()->prepare("UPDATE posts SET {$sqlRequestPart} WHERE idPost = :idPost"); 
+            $statement = $this->db->prepare("UPDATE posts SET {$sqlRequestPart} WHERE idPost = :idPost"); 
             $statement->setFetchMode(PDO::FETCH_CLASS, Post::class);
             return $statement->execute($data);  
     }
     //delete Post
     public function destroyPost(int $idPost): bool
     {
-        $statement = $this->db->getPDO()->prepare("DELETE FROM posts WHERE idPost = ?");
+        $statement = $this->db->prepare("DELETE FROM posts WHERE idPost = ?");
         $statement->setFetchMode(PDO::FETCH_CLASS, Post::class);
         return $statement->execute(array($idPost)); 
     }
@@ -59,7 +59,7 @@ class AdminRepository extends AbstractRepository
             //getAllUsers
     public function getAllUsres(): array
     {
-        $statement = $this->db->getPDO()->prepare("SELECT * FROM users ORDER BY dateLastUpdate DESC");
+        $statement = $this->db->prepare("SELECT * FROM users ORDER BY dateLastUpdate DESC");
         $statement->setFetchMode(PDO::FETCH_CLASS, User::class);
         $statement->execute(); 
         return $statement->fetchAll();
@@ -79,7 +79,7 @@ class AdminRepository extends AbstractRepository
            $i++;   
            }
            $idUser = $_GET['idUser'];
-           $statement = $this->db->getPDO()->prepare("UPDATE users SET {$sqlRequestPart} WHERE idUser = '$idUser'"); 
+           $statement = $this->db->prepare("UPDATE users SET {$sqlRequestPart} WHERE idUser = '$idUser'"); 
            $statement->setFetchMode(PDO::FETCH_CLASS, User::class);
            return $statement->execute($data); 
     
@@ -87,7 +87,7 @@ class AdminRepository extends AbstractRepository
     //getAllComment
     public function getAllComment(): array
     {
-        $statement = $this->db->getPDO()->prepare("SELECT * FROM comment as c, users as u, posts as p WHERE idPost=c.postComment AND idUser=c.userComment  ORDER BY dateLastUpdateComment DESC");
+        $statement = $this->db->prepare("SELECT * FROM comment as c, users as u, posts as p WHERE idPost=c.postComment AND idUser=c.userComment  ORDER BY dateLastUpdateComment DESC");
         $statement->setFetchMode(PDO::FETCH_CLASS, DetailsCommentesDTO::class);
         $statement->execute(); 
         return $statement->fetchAll();
@@ -95,7 +95,7 @@ class AdminRepository extends AbstractRepository
     //validat comment
     public function validatComment(int $idComment): bool
     {
-        $statement = $this->db->getPDO()->prepare("UPDATE comment SET validateComment=1 WHERE idComment= $idComment");
+        $statement = $this->db->prepare("UPDATE comment SET validateComment=1 WHERE idComment= $idComment");
         $statement->setFetchMode(PDO::FETCH_CLASS, DetailsCommentesDTO::class);
         return $statement->execute(); 
             

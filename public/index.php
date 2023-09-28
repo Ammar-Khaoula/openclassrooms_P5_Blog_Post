@@ -31,7 +31,7 @@ $router->post('/admin/deletePost',     'Src\Controllers\AdminController@destroyP
 $router->get('/admin/editPost',     'Src\Controllers\AdminController@editPost');
 $router->post('/admin/updatePost',     'Src\Controllers\AdminController@updatePost');
 $router->get('/admin/listUsers', 'Src\Controllers\AdminController@getAllUsers');
-$router->post('/admin/listUsers', 'Src\Controllers\AdminController@validat');
+$router->post('/admin/listUsers', 'Src\Controllers\AdminController@validatUser');
 $router->get('/profil', 'Src\Controllers\AdminController@profil');
 $router->post('/profil', 'Src\Controllers\AdminController@sendMessage');
 $router->get('/admin/editProfil', 'Src\Controllers\AdminController@editProfil');

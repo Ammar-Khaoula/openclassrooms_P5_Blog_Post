@@ -69,7 +69,7 @@ class Comment{
     {
         return (new DateTime($this->dateLastUpdate))->format('d/m/y à H:i');       
     }
-    public function setDateLastUpdate($dateLastUpdate): self
+    public function setDateLastUpdateComment(DateTime $dateLastUpdate): self
     {
         $this->dateLastUpdate = $dateLastUpdate;
         return $this;
