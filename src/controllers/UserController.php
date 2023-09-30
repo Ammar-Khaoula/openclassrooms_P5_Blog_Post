@@ -4,19 +4,16 @@ namespace Src\Controllers;
 use Src\Controllers\Controller;
 use Src\service\UserService;
 use Src\service\PostService;
-use Src\service\AdminService;
 use Src\entity\User;
 
 class UserController extends Controller{
 
     private UserService $userService;
     private PostService $postService;
-    private AdminService $AdminService;
 
     public function __construct(){
         $this->userService =  new UserService();
         $this->postService =  new PostService();
-        $this->AdminService =  new AdminService();
     }
     public function signup(): void
     {
@@ -37,9 +34,9 @@ class UserController extends Controller{
 
       $result= $this->userService->register($firstName, $lastName,$email,$mp);    
         if($result){
-          $this->view('user.login');
+          header('location: /openclassrooms_P5_Blog_Post/login?success=true');
         }else{
-          $this->view('user.register'); 
+          header('location: /openclassrooms_P5_Blog_Post/signup?error=true');  
            
         }
     }
@@ -51,27 +48,24 @@ class UserController extends Controller{
     public function loginPost(): void
     {
       $this->validateToken();
-        $posts = $this->postService->getAllpost();
-        $admin = $this->AdminService->getAdmin();
         $user =  $this->userService->getUserByEmail(strip_tags($_POST['email']));
         if(!is_null($user) && !empty($user) && password_verify($_POST['mp'], $user->getMp())){
-          //$user = true;
           if($user){ 
             $user->setSession();
             if($this->isAdmin() && $user->getValidate() == 1){
-                $this->view('admin.index', compact('posts')); 
+              header('location: /openclassrooms_P5_Blog_Post/admin/posts?success=true'); 
               }
-              if($user->getValidate() == 1)
+              else if($user->getValidate() == 1)
               {
-                $this->view('admin.profil', compact('admin'));
+                header('location: /openclassrooms_P5_Blog_Post/profil');
               }
-              if($user->getValidate() == 0)
+              else if($user->getValidate() == 0)
               {
-                $this->view('user.login');
+                header('location: /openclassrooms_P5_Blog_Post/login?error=true');
               }
           }
         }else{
-          $this->view('user.login');
+          header('location: /openclassrooms_P5_Blog_Post/login?message=true');
         }
     }
     //disconnect the user

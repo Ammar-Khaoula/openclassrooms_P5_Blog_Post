@@ -45,13 +45,11 @@ class PostController extends Controller
     public function createComment(): bool
     {
             $contentComment = strip_tags($_POST['contentComment']);
-            $userComment =  $_SESSION['users']['idUser'];//$id_user =  $_GET['idUser']
+            $userComment =  $_SESSION['users']['idUser'];
             $postComment  = $_GET['idPost'];
-            $post =  $this->postService->getPostById($_GET['idPost']);   
-            $comment = $this->commentService->getCommentsByPostId($_GET['idPost']);
             $result = $this->commentService->createComment($contentComment, $postComment , $userComment);   
                 if($result){
-                    $this->view('blog.post', compact('post', 'comment'));                    return true;
+                    header('location: /openclassrooms_P5_Blog_Post/post?idPost='.$postComment );                    return true;
                 }else{
                     return false;
                 }

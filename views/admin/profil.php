@@ -1,4 +1,6 @@
-
+<?php if(isset($_GET['error'])): ?>
+      <div class="alert alert-danger">Vous ne pouvez pas accéder à cette page</div>
+  <?php endif ?>
 <div id="profil">
     <div class="m-5" >
         <div>   
