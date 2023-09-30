@@ -17,12 +17,14 @@ class AdminController extends controller{
         $this->AdminService =  new AdminService();
         $this->postService =  new PostService();
     }  
-    public function validatUser(): void
+    public function validatUser(): bool
     {
-        $this->validateToken();
-            $users = $this->AdminService->getAllUsers();
-            $this->AdminService->validat($_GET['idUser']);
-            $this->view('admin.listUsers', compact('users'));
+        $result = $this->AdminService->validat($_GET['idUser']);
+        if ($result){
+            header('location: '.$_SERVER['HTTP_REFERER']);
+        }else{
+            return false;
+        }
     }
     
       // get post admin
@@ -47,7 +49,7 @@ class AdminController extends controller{
     } 
 
     //process the data send in post
-    public function createPost(): void
+    public function createPost(): bool
     {
         $this->validateToken();
 
@@ -63,9 +65,12 @@ class AdminController extends controller{
             $article->setChapo($chapo);
             $article->setContent($content);
 
-            $posts = $this->postService->getAllpost();      
-            $this->AdminService->createPost($title, $chapo, $content, $auteur, $idUser);
-            $this->view('admin.index', compact('posts')); 
+            $result = $this->AdminService->createPost($title, $chapo, $content, $auteur, $idUser);
+            if($result){
+                header('location: /openclassrooms_P5_Blog_Post/admin/posts');
+            }else{
+                return false;
+            }  
     }
 
     public function editPost(): void
@@ -77,20 +82,24 @@ class AdminController extends controller{
     }
     public function updatePost(): void
     {
-        if (!is_null($this->isAdmin()) && !empty($this->isAdmin())){    
-            $posts = $this->postService->getAllpost();      
-            $this->AdminService->updatePost($_GET['idPost'], $_POST);
-            $this->view('admin.index', compact('posts'));    
+        if (!is_null($this->isAdmin()) && !empty($this->isAdmin())){          
+            $result = $this->AdminService->updatePost($_GET['idPost'], $_POST);
+            if($result){
+                header('location: /openclassrooms_P5_Blog_Post/admin/posts');
+            }
         }
     }
         //delete post
-    public function destroyPost(): void
+    public function destroyPost(): bool
     {
         $this->validateToken();
         if($this->isAdmin()){
-            $posts = $this->postService->getAllpost();
             $result = $this->AdminService->destroyPost($_GET['idPost']);
-            $this->view('admin.index', compact('posts'));
+            if($result){
+                header('location: /openclassrooms_P5_Blog_Post/admin/posts');
+            }
+        }else{
+            return false;
         }
     }
     //get all users
@@ -113,7 +122,7 @@ class AdminController extends controller{
             $admin = $this->AdminService->getAdmin();
             $this->view('admin.editProfil', compact('admin'));
         }else{
-            echo "Vous ne pouvez pas accéder à cette page";
+            header('location: /openclassrooms_P5_Blog_Post/profil?error=true');;
         }
     }
     public function updateProfil(): void
@@ -175,9 +184,10 @@ class AdminController extends controller{
     public function validatComment(): void
     {
         if($this->isAdmin()){
-            $comment = $this->AdminService->getAllComment();
             $result = $this->AdminService->validatComment($_GET['idComment']);
-            $this->view('admin.listComment', compact('comment'));
+            if ($result){
+                header('location: /openclassrooms_P5_Blog_Post/admin/listComment?success=true');
+            }
         }
     }
     
