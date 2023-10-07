@@ -9,10 +9,6 @@
         <input type="text" class="form-control" name="chapo" id="title" value="<?= $params['post']->getChapo()?>">        
     </div>
     <div class="form-group mt-4">
-        <label for="auteur">auteur</label>
-        <input type="text" class="form-control" name="auteur" id="title" value="<?= $params['post']->getAuteur()?>">        
-    </div>
-    <div class="form-group mt-4">
         <label for="content">contenu de l'article</label>
         <textarea name="content" id="content" rows="8" class="form-control"><?= $params['post']->getContent()?></textarea>
     </div>

@@ -21,27 +21,47 @@ class PostController extends Controller
 
         
     }
-    //getAllPost
+     /**
+     * Display : All posts
+     *
+     * @return void
+     */
     public function getAllPost(): void
     {
         $posts = $this->postService->getAllpost();
         $this->view('blog.index', compact('posts'));
     }
 
-       //getPostById
+    /**
+     * Display : Post details
+     *
+     * @param integer $postId ID of the post to recover
+     *
+     * @return void
+     */
     public function getPostById(): void
     {
         $post =  $this->postService->getPostById($_GET['idPost']);   
         $comment = $this->commentService->getCommentsByPostId($_GET['idPost']);
         $this->view('blog.post', compact('post', 'comment'));
     }
-      //create comment
+    /**
+     * display : Check comment for create new commentaire
+     *
+     * @return void
+     */
     public function createComments(): void
     {
         $post =  $this->postService->getPostById($_GET['idPost']);
         $this->view('blog.createComment', compact('post'));
     }
-    
+     /**
+     * Validate form : Create new comment
+     *
+     * @param integer $postId ID of the post to link comment
+     *
+     * @return bool
+     */
     public function createComment(): bool
     {
             $contentComment = strip_tags($_POST['contentComment']);
@@ -54,7 +74,13 @@ class PostController extends Controller
                     return false;
                 }
     }
-        //get comment by id
+     /**
+     * Display : comment details
+     *
+     * @param integer $commentId ID of the comment to recover
+     *
+     * @return void
+     */
     public function commentbById(): void
     {
         $comments = $this->commentService->getCommentById($_GET['idComment']);
@@ -64,7 +90,13 @@ class PostController extends Controller
         $this->view('blog.editComment', compact('comments'));
     }
 
-    //update Comment
+     /**
+     * Validate form : update comment
+     *
+     * @param integer $id ID of the comment to be update
+     *
+     * @return void
+     */
     public function updateComment(): void
     {
             $result = $this->commentService->updateComment($_GET['idComment'], $_POST);
@@ -72,7 +104,13 @@ class PostController extends Controller
             echo "votre commentaire est modifier avec succes"; 
         }        
     }
-       //delete comment
+    /**
+     * Validate form : Delete comment
+     *
+     * @param integer $id ID of the comment to be deleted
+     *
+     * @return void
+     */
     public function destroyComment(): void
     { 
        $comment = $this->commentService->getCommentById($_GET['idComment']);
@@ -85,6 +123,4 @@ class PostController extends Controller
                 header('location: '.$_SERVER['HTTP_REFERER']);
             }
     }
-
-    
 }

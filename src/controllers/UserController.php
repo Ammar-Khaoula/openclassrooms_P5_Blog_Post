@@ -15,10 +15,20 @@ class UserController extends Controller{
         $this->userService =  new UserService();
         $this->postService =  new PostService();
     }
+     /**
+     * Display form : Signup for create new user account
+     *
+     * @return void
+     */
     public function signup(): void
     {
         $this->view('user.register');
     }
+    /**
+     * Validate form : Create new user account
+     *
+     * @return void
+     */
     public function signupPost(): void
     {
       $firstName = strip_tags($_POST['firstName']);
@@ -40,11 +50,21 @@ class UserController extends Controller{
            
         }
     }
+    /**
+     * Display form : Login
+     *
+     * @return void
+     */
     public function login(): void
     {
       $this->createToken();
       $this->view('user.login');
     }
+    /**
+     * Validate form : Check user data and connect
+     *
+     * @return void
+     */
     public function loginPost(): void
     {
       $this->validateToken();
@@ -68,7 +88,11 @@ class UserController extends Controller{
           header('location: /openclassrooms_P5_Blog_Post/login?message=true');
         }
     }
-    //disconnect the user
+    /**
+     * Destroy session and redirect
+     *
+     * @return void
+     */
     public function deconnection(): void
     {
         $posts = $this->postService->getAllpost();

@@ -21,7 +21,7 @@
                     <p class="card-text content"><?= $comment->getContentComment() ?></p>
                 </div>
                 <div>   
-                    <a href="/openclassrooms_P5_Blog_Post/post/editComment?idComment=<?= $comment->getIdComment() ?>" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+
                     <form action="/openclassrooms_P5_Blog_Post/post/delete?idComment=<?= $comment->getIdComment() ?>" method="POST" class="d-inline">
                         <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                     </form>  

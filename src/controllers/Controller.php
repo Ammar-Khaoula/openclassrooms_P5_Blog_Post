@@ -3,7 +3,11 @@ namespace Src\Controllers;
 abstract class Controller
 {
 
-    //we check if we are connected and if isAdmin = true
+    /**
+     * we check if we are connected and if isAdmin = true
+     *
+     * @return bool
+     */
     protected function isAdmin(): bool
     {
         if(isset($_SESSION['users']) && $_SESSION['users']['isAdmin'] == 1){
@@ -12,6 +16,11 @@ abstract class Controller
             return false;
         }
     }
+    /**
+     * validate form : create token
+     *
+     * @return void
+     */
     protected function createToken(): void
     {
         if (!isset($_SESSION['csrf_token'])) {
@@ -19,6 +28,11 @@ abstract class Controller
             $_SESSION['csrf_token_time'] = time();
           }
     }
+    /**
+     * validate form : validate Token
+     *
+     * @return void
+     */
     protected function validateToken(): void
     {
         if ($_POST['csrf_token'] !== $_SESSION['csrf_token']) {
@@ -37,7 +51,11 @@ abstract class Controller
             }
           }
     }
-
+/**
+     * validate form : configure and return views
+     *
+     * @return void
+     */
     public function view(string $path, array $params = null): void
     {
         ob_start();
