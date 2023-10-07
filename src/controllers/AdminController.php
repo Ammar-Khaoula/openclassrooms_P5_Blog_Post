@@ -17,6 +17,11 @@ class AdminController extends controller{
         $this->AdminService =  new AdminService();
         $this->postService =  new PostService();
     }  
+    /**
+     * validate form : validate users
+     *
+     * @return bool
+     */
     public function validatUser(): bool
     {
         $result = $this->AdminService->validat($_GET['idUser']);
@@ -27,7 +32,11 @@ class AdminController extends controller{
         }
     }
     
-      // get post admin
+    /**
+     * Display : All posts
+     *
+     * @return void
+     */
     public function getAllPosts(): void
     {
         if($this->isAdmin()){
@@ -39,7 +48,11 @@ class AdminController extends controller{
         
     }
 
-    //return the form
+    /**
+     * display : Check post for create new post
+     *
+     * @return void
+     */
     public function create(): void
     {
         if($this->isAdmin()){
@@ -48,7 +61,11 @@ class AdminController extends controller{
         
     } 
 
-    //process the data send in post
+    /**
+     * Validate form : Create new post
+     *
+     * @return bool
+     */
     public function createPost(): bool
     {
         $this->validateToken();
@@ -72,7 +89,13 @@ class AdminController extends controller{
                 return false;
             }  
     }
-
+   /**
+     * Display form : Edit existing post
+     *
+     * @param integer $id ID of the post to edit
+     *
+     * @return void
+     */
     public function editPost(): void
     { 
         if($this->isAdmin()){
@@ -80,6 +103,13 @@ class AdminController extends controller{
             $this->view('admin.editPost', compact('post'));
         }
     }
+      /**
+     * Validate form : Edit existing post
+     *
+     * @param integer $id ID of the post to update
+     *
+     * @return void
+     */
     public function updatePost(): void
     {
         if (!is_null($this->isAdmin()) && !empty($this->isAdmin())){          
@@ -89,8 +119,14 @@ class AdminController extends controller{
             }
         }
     }
-        //delete post
-    public function destroyPost(): bool
+    /**
+     * Validate form : Delete post
+     *
+     * @param integer $id ID of the post to be deleted
+     *
+     * @return void
+     */
+    public function destroyPost(): void
     {
         $this->validateToken();
         if($this->isAdmin()){
@@ -98,11 +134,13 @@ class AdminController extends controller{
             if($result){
                 header('location: /openclassrooms_P5_Blog_Post/admin/posts');
             }
-        }else{
-            return false;
         }
     }
-    //get all users
+    /**
+     * Display : All users
+     *
+     * @return void
+     */
     public function getAllUsers(): void
     {
         if($this->isAdmin()){
@@ -110,12 +148,19 @@ class AdminController extends controller{
             $this->view('admin.listUsers', compact('users'));
         }
     }
+     /**
+     * display : profil user
+     * @return void
+     */
     public function profil(): void
     {
             $admin = $this->AdminService->getAdmin();
             $this->view('admin.profil', compact('admin'));
     }
-    //update profil
+     /**
+     * display : update user
+     * @return void
+     */
     public function editProfil(): void
     {
         if($this->isAdmin()){
@@ -125,13 +170,23 @@ class AdminController extends controller{
             header('location: /openclassrooms_P5_Blog_Post/profil?error=true');;
         }
     }
+     /**
+     * Validate form : update user
+     *
+     * @param integer $id ID of the user to update
+     *
+     * @return void
+     */
     public function updateProfil(): void
     {
         $result = $this->AdminService->updateProfil($_GET['idUser'], $_POST);
         $admin = $this->AdminService->getAdmin();
         $this->view('admin.profil', compact('admin'));
     }
-    // envoyer un email avec mailjet
+     /**
+     * Validate form : send message
+     * @return void
+     */
     public function sendMessage(): void
     {
             define('API_USER', 'b6ec5c5caa3fe42382477ac17f66e1bc');
@@ -172,7 +227,11 @@ class AdminController extends controller{
                 }
             }
     }
-        //get all comment
+     /**
+     * Display : get All comment
+     *
+     * @return void
+     */
     public function getAllComment(): void
     {
         if($this->isAdmin()){
@@ -180,7 +239,11 @@ class AdminController extends controller{
             $this->view('admin.listComment', compact('comment'));
         }
     }
-    //validate comment
+    /**
+     * validate form : validate comment
+     *
+     * @return void
+     */
     public function validatComment(): void
     {
         if($this->isAdmin()){

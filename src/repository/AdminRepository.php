@@ -9,7 +9,10 @@ use Src\entity\DetailsCommentesDTO;
 
 class AdminRepository extends AbstractRepository
 {
-    // get Admin
+    /**
+     * Get admin for dashboard
+     * @return User
+     */
     public function getAdmin(): User 
     {
         $req = $this->db->prepare("SELECT * FROM users WHERE isAdmin = 1");
@@ -17,7 +20,13 @@ class AdminRepository extends AbstractRepository
         $req->execute(); 
         return $req->fetch();
     }
-     //validat user
+    /**
+     * Dynamic update prepare method
+     *
+     * @param int $idUser
+     *
+     * @return bool
+     */
     public function validat(int $idUser): bool
     {
         $statement = $this->db->prepare("UPDATE users SET validate=1 WHERE idUser= :idUser");
@@ -27,13 +36,26 @@ class AdminRepository extends AbstractRepository
         return $statement->execute(); 
         
     }
-    //create Post
+    /**
+     * Dynamic insert prepare method
+     *
+     * @param array $data
+     *
+     * @return bool
+     */
     public function createPost(string $title, string $chapo, string $content, string $auteur, int $userPost): bool
     {
         $req = $this->db->prepare("INSERT INTO posts (title, chapo, content, auteur, userPost) VALUES (?, ?, ?, ?, ?)");
         return  $req->execute(array($title, $chapo, $content, $auteur, $userPost)); 
     }
-    //update Post
+    /**
+     * Dynamic update prepare method
+     *
+     * @param integer $id
+     * @param array $data
+     *
+     * @return bool
+     */
     public function updatePost(int $idPost, array $data): bool
     {   
         $sqlRequestPart = "";
@@ -48,7 +70,13 @@ class AdminRepository extends AbstractRepository
             $statement->setFetchMode(PDO::FETCH_CLASS, Post::class);
             return $statement->execute($data);  
     }
-    //delete Post
+    /**
+     * Dynamic delate prepare method
+     *
+     * @param integer $idPost
+     *
+     * @return bool
+     */
     public function destroyPost(int $idPost): bool
     {
         $statement = $this->db->prepare("DELETE FROM posts WHERE idPost = ?");
@@ -56,7 +84,10 @@ class AdminRepository extends AbstractRepository
         return $statement->execute(array($idPost)); 
     }
 
-            //getAllUsers
+    /**
+     * Get  all Users for dashboard
+     * @return array
+     */
     public function getAllUsres(): array
     {
         $statement = $this->db->prepare("SELECT * FROM users ORDER BY dateLastUpdate DESC");
@@ -64,7 +95,15 @@ class AdminRepository extends AbstractRepository
         $statement->execute(); 
         return $statement->fetchAll();
     }
-  
+    /**
+     * Dynamic update prepare method
+     *
+     * @param integer $id
+     * @param string $pathPhoto
+     * @param array $data
+     *
+     * @return bool
+     */
     public function updateProfil(int $idUser, array $data, string $pathPhoto): bool
     {      
         $sqlRequestPart = "";
@@ -84,7 +123,10 @@ class AdminRepository extends AbstractRepository
            return $statement->execute($data); 
     
     }
-    //getAllComment
+    /**
+     * Get  all comment for dashboard
+     * @return array
+     */
     public function getAllComment(): array
     {
         $statement = $this->db->prepare("SELECT * FROM comment as c, users as u, posts as p WHERE idPost=c.postComment AND idUser=c.userComment  ORDER BY dateLastUpdateComment DESC");
@@ -92,7 +134,13 @@ class AdminRepository extends AbstractRepository
         $statement->execute(); 
         return $statement->fetchAll();
     }
-    //validat comment
+     /**
+     * Dynamic update prepare method
+     *
+     * @param int $idComment
+     *
+     * @return bool
+     */
     public function validatComment(int $idComment): bool
     {
         $statement = $this->db->prepare("UPDATE comment SET validateComment=1 WHERE idComment= $idComment");

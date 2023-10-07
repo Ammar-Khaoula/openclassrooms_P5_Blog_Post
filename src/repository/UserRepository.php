@@ -6,13 +6,22 @@ use Src\repository\AbstractRepository;
 
 class UserRepository extends AbstractRepository{
 
-    //register user
+     /**
+     * Dynamic insert query method
+     *
+     * @param array $data
+     *
+     * @return bool
+     */
     public function saveUser(string $firstName, string $lastName , string $email, string $mp): bool
     {
         $req = $this->db->prepare("INSERT INTO users (firstName, lastName, email, mp) VALUES (?, ?, ?, ?)");
         return $req->execute(array($firstName, $lastName, $email, $mp)); 
     }
-    //login user
+     /**
+     * Get email by Id with User
+     * @return User
+     */
     public function getUserByEmail(): User
     {
         $req = $this->db->prepare("SELECT * FROM users WHERE email = ?");
@@ -20,7 +29,13 @@ class UserRepository extends AbstractRepository{
         $req->execute(array($_POST['email'])); 
         return $req->fetch();    
     }
-     //count number user by email
+     /**
+     * Get number user by email
+     *
+     * @param string $email
+     *
+     * @return array
+     */
     public function getNumberOfUserByEmail(string $email): array
     {
         $req = $this->db->prepare("SELECT count(email) as count FROM users WHERE email = ?");

@@ -13,90 +13,102 @@ class DetailsArticleDTO{
     private $lastName;
     private $email;
     private $userPost;
-    private $idUser;
-    private $catchphrase;
-    private $photo;
     private $validate;
     private $auteur;
     
+      /**
+     * get the id_user_post of the post
+     * @return int
+     */
     public function getUserPost(): int
     {
         return $this->userPost;
     }
-    public function setUserPost(int $userPost): self
-    {
-        $this->userPost = $userPost;
-        return $this;
-    }
+    /**
+     * get the first_name of the user
+     * @return string
+     */
     public function getFirstName(): string
     {
         return $this->firstName;
     }
+      /**
+     * get the email of the user
+     * @return string
+     */
     public function getEmail(): string
     {
         return $this->email;
     }
+      /**
+     * get the last_name of the user
+     * @return string
+     */
     public function getLastName(): string
     {
         return $this->lastName;
     }
+      /**
+     * get the validate_compte of the user
+     * @return bool
+     */
     public function getValidate() : bool
     {
         return $this->validate;
     }
-  
+      /**
+     * get the id_post of the post
+     * @return int
+     */
     public function getIdPost(): int
     {
         return $this->idPost;
     }
+       /**
+     * get the title of the post
+     * @return string
+     */
     public function getTitle(): string
     {
         return $this->title;
     }
-
+   /**
+     * get the chapo string
+     */
     public function getChapo(): string
     {
         return $this->chapo;
     }
-    
-    public function getPhoto(): string
-    {
-        return $this->photo;
-    }
-    
+       /**
+     * get the Date_last_update_post of the post
+     * @return string
+     */
     public function getDateLastUpdate(): string
     {
         return (new DateTime($this->dateLastUpdatePost))->format('d/m/y à H:i');       
     }
-       public function getContent(): string
-       {
+       /**
+     * get the content_post of the post
+     * @return string
+     */
+    public function getContent(): string
+    {
         return $this->content;
     }
+    /**
+     * get the auteur of the user
+     * @return string
+     */
     public function getAuteur(): string
     {
         return $this->auteur;
     }
-    public function setAuteur(string $auteur): self
-    {
-        $this->auteur = $auteur;
-        return $this;
-    }
-
-        //create user session
-    public function setSession(): void
-    {
-        $_SESSION['users'] = [
-            'idUser' =>$this->idUser,
-            'email' => $this->email,
-            'firstName' => $this->firstName,
-            'lastName' => $this->lastName,
-            'catchphrase' =>$this->catchphrase,
-            'photo' => $this->photo,
-            'validate'=> $this->validate
-        ];
-            
-    }
-    public function getButton(): string{        
+ /**
+     * get Button read article
+     * @return string
+     */
+    public function getButton(): string
+    {        
          if(isset($_SESSION['users']) && $this->getvalidate() == 1){
             return <<<HTML
              <a href="/openclassrooms_P5_Blog_Post/post?idPost=$this->idPost" class="btnRead">lire l'article</a>

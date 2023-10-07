@@ -10,7 +10,14 @@ class UserService{
     public function __construct(){
         $this->userRepository =  new UserRepository();
     }
-//register
+
+    /**
+     * Dynamic insert query method
+     *
+     * @param array $data
+     *
+     * @return bool
+     */
     public function register(string $firstName, string $lastName , string $email, string $mp): bool
     {
         if(!empty($lastName) && !empty($email) && !empty($mp)){
@@ -22,7 +29,10 @@ class UserService{
             }
         }
     }
-    //login
+    /**
+     * Get email by Id with User
+     * @return User
+     */
     public function getUserByEmail(): User
     {
             $email = true;
