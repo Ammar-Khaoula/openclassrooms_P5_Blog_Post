@@ -7,7 +7,7 @@ use Src\repository\AbstractRepository;
 class UserRepository extends AbstractRepository{
 
      /**
-     * Dynamic insert query method
+     * Dynamic insert prepare method
      *
      * @param array $data
      *
@@ -20,14 +20,19 @@ class UserRepository extends AbstractRepository{
     }
      /**
      * Get email by Id with User
-     * @return User
+     * @return User|bool
      */
-    public function getUserByEmail(): User
+    public function getUserByEmail(string $email): User|bool
     {
         $req = $this->db->prepare("SELECT * FROM users WHERE email = ?");
         $req->setFetchMode(PDO::FETCH_CLASS, User::class);
-        $req->execute(array($_POST['email'])); 
-        return $req->fetch();    
+        $req->execute(array($email)); 
+        return $req->fetch();
+        /*if($user){
+            return $user;
+        }else{
+            return new User;
+        }*/
     }
      /**
      * Get number user by email

@@ -18,7 +18,7 @@
   
         <?php foreach($params['posts'] as $post) : ?>
             <tr>
-                <td><?= $post->getLastName() . $post->getFirstName() ?></td>
+                <td><?= $post->getLastName() .' '. $post->getFirstName() ?></td>
                 <td><?= $post->getTitle() ?></td>
                 <td><?= $post->getDateLastUpdate()?></td>
                 <td>

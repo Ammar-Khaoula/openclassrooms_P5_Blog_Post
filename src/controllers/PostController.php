@@ -12,14 +12,10 @@ class PostController extends Controller
     private CommentService $commentService;
     private UserService $userService;
 
-
-
     public function __construct(){
         $this->postService =  new PostService();
         $this->commentService =  new CommentService();
-        $this->userService =  new UserService();
-
-        
+        $this->userService =  new UserService();        
     }
      /**
      * Display : All posts

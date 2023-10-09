@@ -4,7 +4,7 @@
         <h6 class="chapo"><?= $params['post']->getChapo() ?></h6>
         <p class="card-text content"><?= $params['post']->getContent() ?></p> 
         <div class="d-flex p-2" style="justify-content: space-between;">
-            <h6><?= $params['post']->getAuteur()?></h6> 
+            <h6><?= $params['post']->getFirstName() .' '. $params['post']->getLastName()?></h6> 
             <h6 class="date"><?= $params['post']->getDateLastUpdate() ?></h6> 
         </div> 
         <a href="/openclassrooms_P5_Blog_Post/" class="btnRead">voir tous les articles</a>       
