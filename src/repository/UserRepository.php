@@ -28,11 +28,6 @@ class UserRepository extends AbstractRepository{
         $req->setFetchMode(PDO::FETCH_CLASS, User::class);
         $req->execute(array($email)); 
         return $req->fetch();
-        /*if($user){
-            return $user;
-        }else{
-            return new User;
-        }*/
     }
      /**
      * Get number user by email
