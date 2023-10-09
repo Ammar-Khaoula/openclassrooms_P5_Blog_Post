@@ -4,18 +4,21 @@ namespace Src\Controllers;
 use Src\Controllers\Controller;
 use Src\service\AdminService;
 use Src\service\PostService;
+use Src\service\CommentService;
 use Src\entity\Post;
 use \Mailjet\Resources;
 
-class AdminController extends controller{
-
+class AdminController extends controller
+{
     private AdminService $AdminService;
     private PostService $postService;
+    private CommentService $commentService;
 
 
     public function __construct(){
         $this->AdminService =  new AdminService();
         $this->postService =  new PostService();
+        $this->commentService =  new CommentService();
     }  
     /**
      * validate form : validate users

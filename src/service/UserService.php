@@ -31,13 +31,10 @@ class UserService{
     }
     /**
      * Get email by Id with User
-     * @return User
+     * @return User|bool
      */
-    public function getUserByEmail(): User
+    public function getUserByEmail(string $email): User|bool
     {
-            $email = true;
-            if($email){
-                return $this->userRepository->getUserByEmail();
-            }
+        return $this->userRepository->getUserByEmail($email);
     }
 }

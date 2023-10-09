@@ -6,7 +6,8 @@ use Src\service\UserService;
 use Src\service\PostService;
 use Src\entity\User;
 
-class UserController extends Controller{
+class UserController extends Controller
+{
 
     private UserService $userService;
     private PostService $postService;
@@ -69,8 +70,7 @@ class UserController extends Controller{
     {
       $this->validateToken();
         $user =  $this->userService->getUserByEmail(strip_tags($_POST['email']));
-        if(!is_null($user) && !empty($user) && password_verify($_POST['mp'], $user->getMp())){
-          if($user){ 
+        if($user && password_verify($_POST['mp'], $user->getMp())){
             $user->setSession();
             if($this->isAdmin() && $user->getValidate() == 1){
               header('location: /openclassrooms_P5_Blog_Post/admin/posts?success=true'); 
@@ -83,8 +83,8 @@ class UserController extends Controller{
               {
                 header('location: /openclassrooms_P5_Blog_Post/login?error=true');
               }
-          }
-        }else{
+        }
+        else{
           header('location: /openclassrooms_P5_Blog_Post/login?message=true');
         }
     }
